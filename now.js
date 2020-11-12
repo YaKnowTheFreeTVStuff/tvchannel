@@ -11,6 +11,7 @@ var token = "?channelno="+ parseInt(channelNo) + "&mode=prod&audioCode=&format=H
 var ajaxVideo = "http://d1jithvltpp1l1.cloudfront.net/getLiveURL";
 var returnString = syncRequest("GET", ajaxVideo);
 returnString = returnString.getBody();
+ console.log(returnString);
 returnString = JSON.parse(returnString).asset.hls.adaptive[0];
 return returnString;
 }
