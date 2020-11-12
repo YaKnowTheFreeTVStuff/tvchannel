@@ -1,4 +1,3 @@
-const deasync = require("deasync");
 const querystring = require("querystring");
 const syncRequest = require("sync-request");
 //ok whatever
