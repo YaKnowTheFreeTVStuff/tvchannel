@@ -12,6 +12,7 @@ res.redirect(newsLink.getVideoURL());
 });
 app.get("/nowtv", function(req, res){
 var newsLink = new now.TVAPI();
+res.set('Access-Control-Allow-Origin', '*');
 res.redirect(newsLink.getVideoURL(parseInt(req.query.channelCode)));
 });
 app.listen(port, ()=> {
