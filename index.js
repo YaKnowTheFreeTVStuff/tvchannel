@@ -7,6 +7,7 @@ var app = express();
 
 app.get("/inews", function(req, res){
 var newsLink = new tvb.NewsAPI();
+res.set('Access-Control-Allow-Origin', '*');
 res.redirect(newsLink.getVideoURL());
 });
 app.get("/nowtv", function(req, res){
