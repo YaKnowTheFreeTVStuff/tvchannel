@@ -8,12 +8,12 @@ var app = express();
 app.get("/inews", function(req, res){
 var newsLink = new tvb.NewsAPI();
 res.set('Access-Control-Allow-Origin', '*');
-res.redirect(newsLink.getVideoURL());
+res.redirect(newsLink.getVideoURL().replace("http://", "https://"));
 });
 app.get("/nowtv", function(req, res){
 var newsLink = new now.TVAPI();
 res.set('Access-Control-Allow-Origin', '*');
-res.redirect(newsLink.getVideoURL(parseInt(req.query.channelCode)));
+res.redirect(newsLink.getVideoURL(parseInt(req.query.channelCode)).replace("http://", "https://"));
 });
 app.listen(port, ()=> {
 console.log("Server started and app is listening on port " + port);
