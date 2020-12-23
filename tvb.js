@@ -1,4 +1,5 @@
 const querystring = require("querystring");
+const fs = require("fs");
 const syncRequest = require("sync-request");
 //ok whatever
 
@@ -16,10 +17,14 @@ returnString = JSON.parse(returnString).url;
 returnString = returnString.replace(/\\/, "");
 return returnString;
 }
-
+function getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+}
 function getServerIp(){
-var returnIP;
-returnIP =syncRequest("GET", "http://api.ipify.org");
-returnIP = returnIP.getBody();
-return returnIP;
+let hkIPAddr = JSON.parse(fs.readFileSync("hkipaddr.json"));
+let ipRange = hkIPAddr.hkIPList[getRandom(0,hkIPAddr.hkIPList.length - 1)];
+let numbersIp1 = ipRange[0].split(".");
+let numbersIp2 = ipRange[0].split(".");
+let finalIP = getRandom(parseInt(numbersIp1[0]),parseInt(numbersIp2[0])) + "." + getRandom(parseInt(numbersIp1[1]),parseInt(numbersIp2[1])) + "." + getRandom(parseInt(numbersIp1[2]),parseInt(numbersIp2[2])) + "." + getRandom(parseInt(numbersIp1[3]),parseInt(numbersIp2[3]));
+return finalIP;
 }
