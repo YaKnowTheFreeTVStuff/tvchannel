@@ -1,6 +1,7 @@
 const querystring = require("querystring");
 const fs = require("fs");
 const syncRequest = require("sync-request");
+const geoIP = require("geoip-lite");
 //ok whatever
 
 function NewsAPI(){
@@ -22,11 +23,20 @@ function getRandom(min, max) {
 }
 function getServerIp(){
 let hkIPAddr = JSON.parse(fs.readFileSync("hkipaddr.json"));
-let selectedRange = getRandom(0,hkIPAddr.hkIPList.length - 1);
-let ipRange = hkIPAddr.hkIPList[selectedRange];
-let numbersIp1 = ipRange[0].split(".");
-let numbersIp2 = ipRange[1].split(".");
-let finalIP = getRandom(parseInt(numbersIp1[0]),parseInt(numbersIp2[0])) + "." + getRandom(parseInt(numbersIp1[1]),parseInt(numbersIp2[1])) + "." + getRandom(parseInt(numbersIp1[2]),parseInt(numbersIp2[2])) + "." + getRandom(parseInt(numbersIp1[3]),parseInt(numbersIp2[3]));
-console.log("Generated IP address: " + finalIP);
+let finalIP = "";
+let numbersIp2;
+let numbersIp1;
+let ipRange;
+let selectedRange;
+while(true){
+selectedRange = getRandom(0,hkIPAddr.hkIPList.length - 1);
+ipRange = hkIPAddr.hkIPList[selectedRange];
+numbersIp1 = ipRange[0].split(".");
+numbersIp2 = ipRange[1].split(".");
+finalIP = getRandom(parseInt(numbersIp1[0]),parseInt(numbersIp2[0])) + "." + getRandom(parseInt(numbersIp1[1]),parseInt(numbersIp2[1])) + "." + getRandom(parseInt(numbersIp1[2]),parseInt(numbersIp2[2])) + "." + getRandom(parseInt(numbersIp1[3]),parseInt(numbersIp2[3]));
+if(geoIP.lookup(finalIP).country == HK){
+	break;
+}
+}
 return finalIP;
 }
