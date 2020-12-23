@@ -22,7 +22,7 @@ function getRandom(min, max) {
 }
 function getServerIp(){
 let hkIPAddr = JSON.parse(fs.readFileSync("hkipaddr.json"));
-console.log(hkIPAddr);
+console.log(hkIPAddr.hkIPList);
 let ipRange = hkIPAddr.hkIPList[getRandom(0,hkIPAddr.hkIPList.length - 1)];
 console.log("Selected IP range: " + ipRange);
 let numbersIp1 = ipRange[0].split(".");
