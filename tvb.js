@@ -18,7 +18,7 @@ returnString = returnString.replace(/\\/, "");
 return returnString;
 }
 function getRandom(min, max) {
-    return Math.random() * (max - min) + min;
+    return Math.floor(Math.random() * (max - min) + min);
 }
 function getServerIp(){
 let hkIPAddr = JSON.parse(fs.readFileSync("hkipaddr.json"));
