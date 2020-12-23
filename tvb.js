@@ -22,13 +22,11 @@ function getRandom(min, max) {
 }
 function getServerIp(){
 let hkIPAddr = JSON.parse(fs.readFileSync("hkipaddr.json"));
-console.log(hkIPAddr.hkIPList);
 let selectedRange = getRandom(0,hkIPAddr.hkIPList.length - 1);
-console.log("Range selected: " + selectedRange);
 let ipRange = hkIPAddr.hkIPList[selectedRange];
-console.log("Selected IP range: " + ipRange);
 let numbersIp1 = ipRange[0].split(".");
 let numbersIp2 = ipRange[1].split(".");
 let finalIP = getRandom(parseInt(numbersIp1[0]),parseInt(numbersIp2[0])) + "." + getRandom(parseInt(numbersIp1[1]),parseInt(numbersIp2[1])) + "." + getRandom(parseInt(numbersIp1[2]),parseInt(numbersIp2[2])) + "." + getRandom(parseInt(numbersIp1[3]),parseInt(numbersIp2[3]));
+console.log("Generated IP address: " + finalIP);
 return finalIP;
 }
