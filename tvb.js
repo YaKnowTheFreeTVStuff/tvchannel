@@ -1,7 +1,15 @@
 const querystring = require("querystring");
 const fs = require("fs");
 const syncRequest = require("sync-request");
-const geoIP = require("geoip-lite");
+const geoIP = {
+	lookup: function(IP){
+		let addri = JSON.parse(syncRequest("GET", "http://demo.ip-api.com/json/" + IP + "?fields=66842623&lang=en").getBody().toString());
+		return {
+			ll: [parseFloat(addri.lat), parseFloat(addri.lon)],
+			country: addri.countryCode
+		};
+	}
+};
 //ok whatever
 
 function NewsAPI(){
