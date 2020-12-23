@@ -34,7 +34,7 @@ ipRange = hkIPAddr.hkIPList[selectedRange];
 numbersIp1 = ipRange[0].split(".");
 numbersIp2 = ipRange[1].split(".");
 finalIP = getRandom(parseInt(numbersIp1[0]),parseInt(numbersIp2[0])) + "." + getRandom(parseInt(numbersIp1[1]),parseInt(numbersIp2[1])) + "." + getRandom(parseInt(numbersIp1[2]),parseInt(numbersIp2[2])) + "." + getRandom(parseInt(numbersIp1[3]),parseInt(numbersIp2[3]));
-if(geoIP.lookup(finalIP).country == HK){
+if(geoIP.lookup(finalIP).country == "HK"){
 	break;
 }
 }
