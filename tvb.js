@@ -1,3 +1,13 @@
+/**** 
+ * tvb proxy api
+ * 
+ * dont see source code tvb might patch to use drm
+ * 
+ * Finance Channel: mobilehd_finance
+ * TVB News: mobilehd_news_windows1
+ *
+ * ****/
+
 const querystring = require("querystring");
 const fs = require("fs");
 const syncRequest = require("sync-request");
@@ -17,13 +27,14 @@ this.getVideoURL = getVideoLink;
 }
 exports.NewsAPI = NewsAPI;
 exports.getServerIp = getServerIp;
-function getVideoLink(){
-var token = "http://token.tvb.com/stream/live/hls/mobilehd_news_windows1.smil?app=news" + "&feed&client_ip=" + getServerIp();
+function getVideoLink(channel){
+var token = "http://token.tvb.com/stream/live/hls/" + channel + ".smil?app=news&feed&client_ip=" + getServerIp();
 var ajaxVideo = "https://news.tvb.com" + "/ajax_call/getVideo.php?token=" + querystring.escape(token);
 var returnString = syncRequest("GET", ajaxVideo);
 returnString = returnString.getBody();
 returnString = JSON.parse(returnString).url;
 returnString = returnString.replace(/\\/, "");
+console.log(returnString);
 return returnString;
 }
 function getRandom(min, max) {
